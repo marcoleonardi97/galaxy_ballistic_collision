@@ -317,7 +317,7 @@ class MilkyWay_galaxy(object):
         from matplotlib.animation import FuncAnimation
         import matplotlib.animation as animation
 
-        dt = (t_end.number / frames) t_end.unit
+        dt = (t_end.number / frames) | t_end.unit
         
         # Make sure we have particles to evolve
         if len(self.stars) == 0 or len(self.gas_particles) == 0:
