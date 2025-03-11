@@ -180,7 +180,9 @@ class MilkyWay_galaxy(object):
         kinetic_energies = []
         
         # Add perturbation to break symmetry and ensure dynamics
-        # This helps prevent the static equilibrium problem
+        """
+        commented out for now because p.vx is not a thing here and i should just
+        change the whole vector
         for p in self.stars:
             p.vx += np.random.normal(0, 5) | units.km/units.s
             p.vy += np.random.normal(0, 5) | units.km/units.s
@@ -189,6 +191,7 @@ class MilkyWay_galaxy(object):
             p.vx += np.random.normal(0, 7) | units.km/units.s
             p.vy += np.random.normal(0, 7) | units.km/units.s
             p.u *= (1.0 + 0.2 * np.random.random())  # Add energy perturbation
+        """
         
         # Update the particle sets in the codes after perturbation
         channel_to_stars = stars_gravity.particles.new_channel_to(self.stars)
@@ -231,7 +234,7 @@ class MilkyWay_galaxy(object):
         
         return times, potential_energies, kinetic_energies
     
-    def plot_system(self, show=True, save=False, filename="galaxy_snapshot.png"):
+    def overview(self, show=True, save=False, filename="galaxy_snapshot.png"):
         """Plot the current state of the system"""
         rcParams.update({'font.size': 12})
         fig = plt.figure(figsize=(16, 10))
@@ -309,10 +312,12 @@ class MilkyWay_galaxy(object):
         else:
             plt.close()
     
-    def create_animation(self, t_end, dt=1.0|units.Myr, frames=20, filename="galaxy_evolution.mp4"):
+    def create_animation(self, t_end, frames=20, filename="galaxy_evolution.mp4"):
         """Create an animation of the galaxy evolution"""
         from matplotlib.animation import FuncAnimation
         import matplotlib.animation as animation
+
+        dt = (t_end.number / frames) t_end.unit
         
         # Make sure we have particles to evolve
         if len(self.stars) == 0 or len(self.gas_particles) == 0:
