@@ -8,3 +8,8 @@ The project aims to simulate the penetration of a Milky Way-like galaxy by a sma
 
 https://github.com/user-attachments/assets/d3f4abc4-d7d2-4b1e-a7ad-6e126fe1a1d9
 
+
+
+
+https://github.com/user-attachments/assets/b1a37f88-b7b1-4f69-9bde-6998088a2583
+
