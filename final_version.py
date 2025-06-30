@@ -12,7 +12,7 @@ from amuse.ic.kingmodel import new_king_model
 
 class GalaxyCollision:
     def __init__(self, n_target_stars=8000, n_target_gas=2000, n_intruder_stars=4000, n_intruder_gas=1000,
-                offset = [0, 0, 30] | units.kpc):
+                offset = [0, 0, 30] | units.kpc, approach_velocity=None):
         """
         Galaxy collision simulator using Ph4 + Fi + Bridge
         """
@@ -21,7 +21,10 @@ class GalaxyCollision:
         self.n_intruder_stars = n_intruder_stars
         self.n_intruder_gas = n_intruder_gas
         self.offset = offset
-        
+        if approach_velocity is None:
+            self.approach_velocity = [-i.number*10 for i in self.offset] | units.km/units.s
+        else:
+            self.approach_velocity = approach_velocity
         self.time = 0 | units.Myr
         self.converter = nbody_system.nbody_to_si(1e11 | units.MSun, 20 | units.kpc)
         
@@ -89,7 +92,7 @@ class GalaxyCollision:
             convert_nbody=nbody_system.nbody_to_si(1e9 | units.Msun, 1 |units.kpc)
         )
         
-        approach_vel = [-i.number * 10 for i in self.offset] | units.km/units.s
+        approach_vel = self.approach_velocity
         
         # Add central black hole to intruder
         intruder_bh = Particles(1)
