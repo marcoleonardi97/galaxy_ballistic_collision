@@ -358,4 +358,4 @@ if __name__ == "__main__":
     collision.run_simulation(t_end=400|units.Myr, dt=2|units.Myr)
     
     # Create animation
-    collision.create_animation("galaxy_collision_fixed.mp4")
+    collision.create_animation("galaxy_collision.mp4")
